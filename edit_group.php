@@ -1,42 +1,42 @@
 <?php
-  $page_title = 'Edit Group';
+  $x64 = 'Edit Group';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   page_require_level(1);
+  
+   fn_a28(1);
 ?>
 <?php
-  $e_group = find_by_id('user_groups',(int)$_GET['id']);
-  if(!$e_group){
-    $session->msg("d","Missing Group id.");
-    redirect('group.php');
+  $x22 = fn_a15('user_groups',(int)$_GET['id']);
+  if(!$x22){
+    $x97->msg("d","Missing Group id.");
+    fn_a34('group.php');
   }
 ?>
 <?php
   if(isset($_POST['update'])){
 
-   $req_fields = array('group-name','group-level');
-   validate_fields($req_fields);
-   if(empty($errors)){
-           $name = remove_junk($db->escape($_POST['group-name']));
-          $level = remove_junk($db->escape($_POST['group-level']));
-         $status = remove_junk($db->escape($_POST['status']));
+   $x86 = array('group-name','group-level');
+   fn_a42($x86);
+   if(empty($x25)){
+           $x54 = fn_a35($x20->escape($_POST['group-name']));
+          $x45 = fn_a35($x20->escape($_POST['group-level']));
+         $x101 = fn_a35($x20->escape($_POST['status']));
 
-        $query  = "UPDATE user_groups SET ";
-        $query .= "group_name='{$name}',group_level='{$level}',group_status='{$status}'";
-        $query .= "WHERE ID='{$db->escape($e_group['id'])}'";
-        $result = $db->query($query);
-         if($result && $db->affected_rows() === 1){
-          //sucess
-          $session->msg('s',"Group has been updated! ");
-          redirect('edit_group.php?id='.(int)$e_group['id'], false);
+        $x78  = "UPDATE user_groups SET ";
+        $x78 .= "group_name='{$x54}',group_level='{$x45}',group_status='{$x101}'";
+        $x78 .= "WHERE ID='{$x20->escape($x22['id'])}'";
+        $x88 = $x20->query($x78);
+         if($x88 && $x20->affected_rows() === 1){
+          
+          $x97->msg('s',"Group has been updated! ");
+          fn_a34('edit_group.php?id='.(int)$x22['id'], false);
         } else {
-          //failed
-          $session->msg('d',' Sorry failed to updated Group!');
-          redirect('edit_group.php?id='.(int)$e_group['id'], false);
+          
+          $x97->msg('d',' Sorry failed to updated Group!');
+          fn_a34('edit_group.php?id='.(int)$x22['id'], false);
         }
    } else {
-     $session->msg("d", $errors);
-    redirect('edit_group.php?id='.(int)$e_group['id'], false);
+     $x97->msg("d", $x25);
+    fn_a34('edit_group.php?id='.(int)$x22['id'], false);
    }
  }
 ?>
@@ -45,21 +45,21 @@
     <div class="text-center">
        <h3>Edit Group</h3>
      </div>
-     <?php echo display_msg($msg); ?>
-      <form method="post" action="edit_group.php?id=<?php echo (int)$e_group['id'];?>" class="clearfix">
+     <?php echo fn_a8($x53); ?>
+      <form method="post" action="edit_group.php?id=<?php echo (int)$x22['id'];?>" class="clearfix">
         <div class="form-group">
               <label for="name" class="control-label">Group Name</label>
-              <input type="name" class="form-control" name="group-name" value="<?php echo remove_junk(ucwords($e_group['group_name'])); ?>">
+              <input type="name" class="form-control" name="group-name" value="<?php echo fn_a35(ucwords($x22['group_name'])); ?>">
         </div>
         <div class="form-group">
               <label for="level" class="control-label">Group Level</label>
-              <input type="number" class="form-control" name="group-level" value="<?php echo (int)$e_group['group_level']; ?>">
+              <input type="number" class="form-control" name="group-level" value="<?php echo (int)$x22['group_level']; ?>">
         </div>
         <div class="form-group">
           <label for="status">Status</label>
               <select class="form-control" name="status">
-                <option <?php if($e_group['group_status'] === '1') echo 'selected="selected"';?> value="1"> Active </option>
-                <option <?php if($e_group['group_status'] === '0') echo 'selected="selected"';?> value="0">Deactive</option>
+                <option <?php if($x22['group_status'] === '1') echo 'selected="selected"';?> value="1"> Active </option>
+                <option <?php if($x22['group_status'] === '0') echo 'selected="selected"';?> value="0">Deactive</option>
               </select>
         </div>
         <div class="form-group clearfix">

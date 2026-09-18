@@ -1,28 +1,28 @@
 <?php include_once('includes/load.php'); ?>
 <?php
-$req_fields = array('username','password' );
-validate_fields($req_fields);
-$username = remove_junk($_POST['username']);
-$password = remove_junk($_POST['password']);
+$x86 = array('username','password' );
+fn_a42($x86);
+$x120 = fn_a35($_POST['username']);
+$x65 = fn_a35($_POST['password']);
 
-if(empty($errors)){
-  $user_id = authenticate($username, $password);
-  if($user_id){
-    //create session with id
-     $session->login($user_id);
-    //Update Sign in time
-     updateLastLogIn($user_id);
-     $session->msg("s", "Welcome to OSWA-INV.");
-     redirect('home.php',false);
+if(empty($x25)){
+  $x116 = fn_a1($x120, $x65);
+  if($x116){
+    
+     $x97->login($x116);
+    
+     fn_a38($x116);
+     $x97->msg("s", "Welcome to OSWA-INV.");
+     fn_a34('home.php',false);
 
   } else {
-    $session->msg("d", "Sorry Username/Password incorrect.");
-    redirect('index.php',false);
+    $x97->msg("d", "Sorry Username/Password incorrect.");
+    fn_a34('index.php',false);
   }
 
 } else {
-   $session->msg("d", $errors);
-   redirect('index.php',false);
+   $x97->msg("d", $x25);
+   fn_a34('index.php',false);
 }
 
 ?>

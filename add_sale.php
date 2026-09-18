@@ -1,38 +1,38 @@
 <?php
-  $page_title = 'Add Sale';
+  $x64 = 'Add Sale';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   page_require_level(3);
+  
+   fn_a28(3);
 ?>
 <?php
 
   if(isset($_POST['add_sale'])){
-    $req_fields = array('s_id','quantity','price','total', 'date' );
-    validate_fields($req_fields);
-        if(empty($errors)){
-          $p_id      = $db->escape((int)$_POST['s_id']);
-          $s_qty     = $db->escape((int)$_POST['quantity']);
-          $s_total   = $db->escape($_POST['total']);
-          $date      = $db->escape($_POST['date']);
-          $s_date    = make_date();
+    $x86 = array('s_id','quantity','price','total', 'date' );
+    fn_a42($x86);
+        if(empty($x25)){
+          $x60      = $x20->escape((int)$_POST['s_id']);
+          $x92     = $x20->escape((int)$_POST['quantity']);
+          $x93   = $x20->escape($_POST['total']);
+          $x19      = $x20->escape($_POST['date']);
+          $x91    = fn_a25();
 
-          $sql  = "INSERT INTO sales (";
-          $sql .= " product_id,qty,price,date";
-          $sql .= ") VALUES (";
-          $sql .= "'{$p_id}','{$s_qty}','{$s_total}','{$s_date}'";
-          $sql .= ")";
+          $x98  = "INSERT INTO sales (";
+          $x98 .= " product_id,qty,price,date";
+          $x98 .= ") VALUES (";
+          $x98 .= "'{$x60}','{$x92}','{$x93}','{$x91}'";
+          $x98 .= ")";
 
-                if($db->query($sql)){
-                  update_product_qty($s_qty,$p_id);
-                  $session->msg('s',"Sale added. ");
-                  redirect('add_sale.php', false);
+                if($x20->query($x98)){
+                  fn_a39($x92,$x60);
+                  $x97->msg('s',"Sale added. ");
+                  fn_a34('add_sale.php', false);
                 } else {
-                  $session->msg('d',' Sorry failed to add!');
-                  redirect('add_sale.php', false);
+                  $x97->msg('d',' Sorry failed to add!');
+                  fn_a34('add_sale.php', false);
                 }
         } else {
-           $session->msg("d", $errors);
-           redirect('add_sale.php',false);
+           $x97->msg("d", $x25);
+           fn_a34('add_sale.php',false);
         }
   }
 
@@ -40,7 +40,7 @@
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
   <div class="col-md-6">
-    <?php echo display_msg($msg); ?>
+    <?php echo fn_a8($x53); ?>
     <form method="post" action="ajax.php" autocomplete="off" id="sug-form">
         <div class="form-group">
           <div class="input-group">

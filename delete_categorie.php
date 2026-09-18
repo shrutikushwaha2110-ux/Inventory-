@@ -1,22 +1,22 @@
 <?php
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-  page_require_level(1);
+  
+  fn_a28(1);
 ?>
 <?php
-  $categorie = find_by_id('categories',(int)$_GET['id']);
-  if(!$categorie){
-    $session->msg("d","Missing Categorie id.");
-    redirect('categorie.php');
+  $x13 = fn_a15('categories',(int)$_GET['id']);
+  if(!$x13){
+    $x97->msg("d","Missing Categorie id.");
+    fn_a34('categorie.php');
   }
 ?>
 <?php
-  $delete_id = delete_by_id('categories',(int)$categorie['id']);
-  if($delete_id){
-      $session->msg("s","Categorie deleted.");
-      redirect('categorie.php');
+  $x21 = fn_a7('categories',(int)$x13['id']);
+  if($x21){
+      $x97->msg("s","Categorie deleted.");
+      fn_a34('categorie.php');
   } else {
-      $session->msg("d","Categorie deletion failed.");
-      redirect('categorie.php');
+      $x97->msg("d","Categorie deletion failed.");
+      fn_a34('categorie.php');
   }
 ?>

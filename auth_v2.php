@@ -1,40 +1,40 @@
 <?php include_once('includes/load.php'); ?>
 <?php
-$req_fields = array('username','password' );
-validate_fields($req_fields);
-$username = remove_junk($_POST['username']);
-$password = remove_junk($_POST['password']);
+$x86 = array('username','password' );
+fn_a42($x86);
+$x120 = fn_a35($_POST['username']);
+$x65 = fn_a35($_POST['password']);
 
-  if(empty($errors)){
+  if(empty($x25)){
 
-    $user = authenticate_v2($username, $password);
+    $x114 = fn_a2($x120, $x65);
 
-        if($user):
-           //create session with id
-           $session->login($user['id']);
-           //Update Sign in time
-           updateLastLogIn($user['id']);
-           // redirect user to group home page by user level
-           if($user['user_level'] === '1'):
-             $session->msg("s", "Hello ".$user['username'].", Welcome to OSWA-INV.");
-             redirect('admin.php',false);
-           elseif ($user['user_level'] === '2'):
-              $session->msg("s", "Hello ".$user['username'].", Welcome to OSWA-INV.");
-             redirect('special.php',false);
+        if($x114):
+           
+           $x97->login($x114['id']);
+           
+           fn_a38($x114['id']);
+           
+           if($x114['user_level'] === '1'):
+             $x97->msg("s", "Hello ".$x114['username'].", Welcome to OSWA-INV.");
+             fn_a34('admin.php',false);
+           elseif ($x114['user_level'] === '2'):
+              $x97->msg("s", "Hello ".$x114['username'].", Welcome to OSWA-INV.");
+             fn_a34('special.php',false);
            else:
-              $session->msg("s", "Hello ".$user['username'].", Welcome to OSWA-INV.");
-             redirect('home.php',false);
+              $x97->msg("s", "Hello ".$x114['username'].", Welcome to OSWA-INV.");
+             fn_a34('home.php',false);
            endif;
 
         else:
-          $session->msg("d", "Sorry Username/Password incorrect.");
-          redirect('index.php',false);
+          $x97->msg("d", "Sorry Username/Password incorrect.");
+          fn_a34('index.php',false);
         endif;
 
   } else {
 
-     $session->msg("d", $errors);
-     redirect('login_v2.php',false);
+     $x97->msg("d", $x25);
+     fn_a34('login_v2.php',false);
   }
 
 ?>

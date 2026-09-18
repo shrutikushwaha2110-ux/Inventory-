@@ -1,14 +1,14 @@
 <?php
-  $page_title = 'All Product';
+  $x64 = 'All Product';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   page_require_level(2);
-  $products = join_product_table();
+  
+   fn_a28(2);
+  $x74 = fn_a24();
 ?>
 <?php include_once('layouts/header.php'); ?>
   <div class="row">
      <div class="col-md-12">
-       <?php echo display_msg($msg); ?>
+       <?php echo fn_a8($x53); ?>
      </div>
     <div class="col-md-12">
       <div class="panel panel-default">
@@ -33,28 +33,28 @@
               </tr>
             </thead>
             <tbody>
-              <?php foreach ($products as $product):?>
+              <?php foreach ($x74 as $x69):?>
               <tr>
-                <td class="text-center"><?php echo count_id();?></td>
+                <td class="text-center"><?php echo fn_a4();?></td>
                 <td>
-                  <?php if($product['media_id'] === '0'): ?>
+                  <?php if($x69['media_id'] === '0'): ?>
                     <img class="img-avatar img-circle" src="uploads/products/no_image.jpg" alt="">
                   <?php else: ?>
-                  <img class="img-avatar img-circle" src="uploads/products/<?php echo $product['image']; ?>" alt="">
+                  <img class="img-avatar img-circle" src="uploads/products/<?php echo $x69['image']; ?>" alt="">
                 <?php endif; ?>
                 </td>
-                <td> <?php echo remove_junk($product['name']); ?></td>
-                <td class="text-center"> <?php echo remove_junk($product['categorie']); ?></td>
-                <td class="text-center"> <?php echo remove_junk($product['quantity']); ?></td>
-                <td class="text-center"> <?php echo remove_junk($product['buy_price']); ?></td>
-                <td class="text-center"> <?php echo remove_junk($product['sale_price']); ?></td>
-                <td class="text-center"> <?php echo read_date($product['date']); ?></td>
+                <td> <?php echo fn_a35($x69['name']); ?></td>
+                <td class="text-center"> <?php echo fn_a35($x69['categorie']); ?></td>
+                <td class="text-center"> <?php echo fn_a35($x69['quantity']); ?></td>
+                <td class="text-center"> <?php echo fn_a35($x69['buy_price']); ?></td>
+                <td class="text-center"> <?php echo fn_a35($x69['sale_price']); ?></td>
+                <td class="text-center"> <?php echo fn_a32($x69['date']); ?></td>
                 <td class="text-center">
                   <div class="btn-group">
-                    <a href="edit_product.php?id=<?php echo (int)$product['id'];?>" class="btn btn-info btn-xs"  title="Edit" data-toggle="tooltip">
+                    <a href="edit_product.php?id=<?php echo (int)$x69['id'];?>" class="btn btn-info btn-xs"  title="Edit" data-toggle="tooltip">
                       <span class="glyphicon glyphicon-edit"></span>
                     </a>
-                    <a href="delete_product.php?id=<?php echo (int)$product['id'];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
+                    <a href="delete_product.php?id=<?php echo (int)$x69['id'];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
                       <span class="glyphicon glyphicon-trash"></span>
                     </a>
                   </div>

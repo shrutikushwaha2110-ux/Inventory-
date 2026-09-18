@@ -1,44 +1,44 @@
 <?php
-  $page_title = 'Edit sale';
+  $x64 = 'Edit sale';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   page_require_level(3);
+  
+   fn_a28(3);
 ?>
 <?php
-$sale = find_by_id('sales',(int)$_GET['id']);
-if(!$sale){
-  $session->msg("d","Missing product id.");
-  redirect('sales.php');
+$x94 = fn_a15('sales',(int)$_GET['id']);
+if(!$x94){
+  $x97->msg("d","Missing product id.");
+  fn_a34('sales.php');
 }
 ?>
-<?php $product = find_by_id('products',$sale['product_id']); ?>
+<?php $x69 = fn_a15('products',$x94['product_id']); ?>
 <?php
 
   if(isset($_POST['update_sale'])){
-    $req_fields = array('title','quantity','price','total', 'date' );
-    validate_fields($req_fields);
-        if(empty($errors)){
-          $p_id      = $db->escape((int)$product['id']);
-          $s_qty     = $db->escape((int)$_POST['quantity']);
-          $s_total   = $db->escape($_POST['total']);
-          $date      = $db->escape($_POST['date']);
-          $s_date    = date("Y-m-d", strtotime($date));
+    $x86 = array('title','quantity','price','total', 'date' );
+    fn_a42($x86);
+        if(empty($x25)){
+          $x60      = $x20->escape((int)$x69['id']);
+          $x92     = $x20->escape((int)$_POST['quantity']);
+          $x93   = $x20->escape($_POST['total']);
+          $x19      = $x20->escape($_POST['date']);
+          $x91    = date("Y-m-d", strtotime($x19));
 
-          $sql  = "UPDATE sales SET";
-          $sql .= " product_id= '{$p_id}',qty={$s_qty},price='{$s_total}',date='{$s_date}'";
-          $sql .= " WHERE id ='{$sale['id']}'";
-          $result = $db->query($sql);
-          if( $result && $db->affected_rows() === 1){
-                    update_product_qty($s_qty,$p_id);
-                    $session->msg('s',"Sale updated.");
-                    redirect('edit_sale.php?id='.$sale['id'], false);
+          $x98  = "UPDATE sales SET";
+          $x98 .= " product_id= '{$x60}',qty={$x92},price='{$x93}',date='{$x91}'";
+          $x98 .= " WHERE id ='{$x94['id']}'";
+          $x88 = $x20->query($x98);
+          if( $x88 && $x20->affected_rows() === 1){
+                    fn_a39($x92,$x60);
+                    $x97->msg('s',"Sale updated.");
+                    fn_a34('edit_sale.php?id='.$x94['id'], false);
                   } else {
-                    $session->msg('d',' Sorry failed to updated!');
-                    redirect('sales.php', false);
+                    $x97->msg('d',' Sorry failed to updated!');
+                    fn_a34('sales.php', false);
                   }
         } else {
-           $session->msg("d", $errors);
-           redirect('edit_sale.php?id='.(int)$sale['id'],false);
+           $x97->msg("d", $x25);
+           fn_a34('edit_sale.php?id='.(int)$x94['id'],false);
         }
   }
 
@@ -46,7 +46,7 @@ if(!$sale){
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
   <div class="col-md-6">
-    <?php echo display_msg($msg); ?>
+    <?php echo fn_a8($x53); ?>
   </div>
 </div>
 <div class="row">
@@ -74,22 +74,22 @@ if(!$sale){
          </thead>
            <tbody  id="product_info">
               <tr>
-              <form method="post" action="edit_sale.php?id=<?php echo (int)$sale['id']; ?>">
+              <form method="post" action="edit_sale.php?id=<?php echo (int)$x94['id']; ?>">
                 <td id="s_name">
-                  <input type="text" class="form-control" id="sug_input" name="title" value="<?php echo remove_junk($product['name']); ?>">
+                  <input type="text" class="form-control" id="sug_input" name="title" value="<?php echo fn_a35($x69['name']); ?>">
                   <div id="result" class="list-group"></div>
                 </td>
                 <td id="s_qty">
-                  <input type="text" class="form-control" name="quantity" value="<?php echo (int)$sale['qty']; ?>">
+                  <input type="text" class="form-control" name="quantity" value="<?php echo (int)$x94['qty']; ?>">
                 </td>
                 <td id="s_price">
-                  <input type="text" class="form-control" name="price" value="<?php echo remove_junk($product['sale_price']); ?>" >
+                  <input type="text" class="form-control" name="price" value="<?php echo fn_a35($x69['sale_price']); ?>" >
                 </td>
                 <td>
-                  <input type="text" class="form-control" name="total" value="<?php echo remove_junk($sale['price']); ?>">
+                  <input type="text" class="form-control" name="total" value="<?php echo fn_a35($x94['price']); ?>">
                 </td>
                 <td id="s_date">
-                  <input type="date" class="form-control datepicker" name="date" data-date-format="" value="<?php echo remove_junk($sale['date']); ?>">
+                  <input type="date" class="form-control datepicker" name="date" data-date-format="" value="<?php echo fn_a35($x94['date']); ?>">
                 </td>
                 <td>
                   <button type="submit" name="update_sale" class="btn btn-primary">Update sale</button>

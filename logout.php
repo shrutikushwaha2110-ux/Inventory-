@@ -1,4 +1,4 @@
 <?php
   require_once('includes/load.php');
-  if(!$session->logout()) {redirect("index.php");}
+  if(!$x97->logout()) {fn_a34("index.php");}
 ?>

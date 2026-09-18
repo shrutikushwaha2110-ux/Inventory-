@@ -1,29 +1,29 @@
 <?php
-  $page_title = 'All categories';
+  $x64 = 'All categories';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-  page_require_level(1);
   
-  $all_categories = find_all('categories')
+  fn_a28(1);
+  
+  $x3 = fn_a9('categories')
 ?>
 <?php
  if(isset($_POST['add_cat'])){
-   $req_field = array('categorie-name');
-   validate_fields($req_field);
-   $cat_name = remove_junk($db->escape($_POST['categorie-name']));
-   if(empty($errors)){
-      $sql  = "INSERT INTO categories (name)";
-      $sql .= " VALUES ('{$cat_name}')";
-      if($db->query($sql)){
-        $session->msg("s", "Successfully Added Categorie");
-        redirect('categorie.php',false);
+   $x85 = array('categorie-name');
+   fn_a42($x85);
+   $x12 = fn_a35($x20->escape($_POST['categorie-name']));
+   if(empty($x25)){
+      $x98  = "INSERT INTO categories (name)";
+      $x98 .= " VALUES ('{$x12}')";
+      if($x20->query($x98)){
+        $x97->msg("s", "Successfully Added Categorie");
+        fn_a34('categorie.php',false);
       } else {
-        $session->msg("d", "Sorry Failed to insert.");
-        redirect('categorie.php',false);
+        $x97->msg("d", "Sorry Failed to insert.");
+        fn_a34('categorie.php',false);
       }
    } else {
-     $session->msg("d", $errors);
-     redirect('categorie.php',false);
+     $x97->msg("d", $x25);
+     fn_a34('categorie.php',false);
    }
  }
 ?>
@@ -31,7 +31,7 @@
 
   <div class="row">
      <div class="col-md-12">
-       <?php echo display_msg($msg); ?>
+       <?php echo fn_a8($x53); ?>
      </div>
   </div>
    <div class="row">
@@ -71,16 +71,16 @@
                 </tr>
             </thead>
             <tbody>
-              <?php foreach ($all_categories as $cat):?>
+              <?php foreach ($x3 as $x11):?>
                 <tr>
-                    <td class="text-center"><?php echo count_id();?></td>
-                    <td><?php echo remove_junk(ucfirst($cat['name'])); ?></td>
+                    <td class="text-center"><?php echo fn_a4();?></td>
+                    <td><?php echo fn_a35(ucfirst($x11['name'])); ?></td>
                     <td class="text-center">
                       <div class="btn-group">
-                        <a href="edit_categorie.php?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
+                        <a href="edit_categorie.php?id=<?php echo (int)$x11['id'];?>"  class="btn btn-xs btn-warning" data-toggle="tooltip" title="Edit">
                           <span class="glyphicon glyphicon-edit"></span>
                         </a>
-                        <a href="delete_categorie.php?id=<?php echo (int)$cat['id'];?>"  class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
+                        <a href="delete_categorie.php?id=<?php echo (int)$x11['id'];?>"  class="btn btn-xs btn-danger" data-toggle="tooltip" title="Remove">
                           <span class="glyphicon glyphicon-trash"></span>
                         </a>
                       </div>

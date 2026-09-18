@@ -1,103 +1,103 @@
 <?php
-  $page_title = 'Edit User';
+  $x64 = 'Edit User';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   page_require_level(1);
+  
+   fn_a28(1);
 ?>
 <?php
-  $e_user = find_by_id('users',(int)$_GET['id']);
-  $groups  = find_all('user_groups');
-  if(!$e_user){
-    $session->msg("d","Missing user id.");
-    redirect('users.php');
+  $x23 = fn_a15('users',(int)$_GET['id']);
+  $x37  = fn_a9('user_groups');
+  if(!$x23){
+    $x97->msg("d","Missing user id.");
+    fn_a34('users.php');
   }
 ?>
 
 <?php
-//Update User basic info
+
   if(isset($_POST['update'])) {
-    $req_fields = array('name','username','level');
-    validate_fields($req_fields);
-    if(empty($errors)){
-             $id = (int)$e_user['id'];
-           $name = remove_junk($db->escape($_POST['name']));
-       $username = remove_junk($db->escape($_POST['username']));
-          $level = (int)$db->escape($_POST['level']);
-       $status   = remove_junk($db->escape($_POST['status']));
-            $sql = "UPDATE users SET name ='{$name}', username ='{$username}',user_level='{$level}',status='{$status}' WHERE id='{$db->escape($id)}'";
-         $result = $db->query($sql);
-          if($result && $db->affected_rows() === 1){
-            $session->msg('s',"Acount Updated ");
-            redirect('edit_user.php?id='.(int)$e_user['id'], false);
+    $x86 = array('name','username','level');
+    fn_a42($x86);
+    if(empty($x25)){
+             $x40 = (int)$x23['id'];
+           $x54 = fn_a35($x20->escape($_POST['name']));
+       $x120 = fn_a35($x20->escape($_POST['username']));
+          $x45 = (int)$x20->escape($_POST['level']);
+       $x101   = fn_a35($x20->escape($_POST['status']));
+            $x98 = "UPDATE users SET name ='{$x54}', username ='{$x120}',user_level='{$x45}',status='{$x101}' WHERE id='{$x20->escape($x40)}'";
+         $x88 = $x20->query($x98);
+          if($x88 && $x20->affected_rows() === 1){
+            $x97->msg('s',"Acount Updated ");
+            fn_a34('edit_user.php?id='.(int)$x23['id'], false);
           } else {
-            $session->msg('d',' Sorry failed to updated!');
-            redirect('edit_user.php?id='.(int)$e_user['id'], false);
+            $x97->msg('d',' Sorry failed to updated!');
+            fn_a34('edit_user.php?id='.(int)$x23['id'], false);
           }
     } else {
-      $session->msg("d", $errors);
-      redirect('edit_user.php?id='.(int)$e_user['id'],false);
+      $x97->msg("d", $x25);
+      fn_a34('edit_user.php?id='.(int)$x23['id'],false);
     }
   }
 ?>
 <?php
-// Update user password
+
 if(isset($_POST['update-pass'])) {
-  $req_fields = array('password');
-  validate_fields($req_fields);
-  if(empty($errors)){
-           $id = (int)$e_user['id'];
-     $password = remove_junk($db->escape($_POST['password']));
-     $h_pass   = sha1($password);
-          $sql = "UPDATE users SET password='{$h_pass}' WHERE id='{$db->escape($id)}'";
-       $result = $db->query($sql);
-        if($result && $db->affected_rows() === 1){
-          $session->msg('s',"User password has been updated ");
-          redirect('edit_user.php?id='.(int)$e_user['id'], false);
+  $x86 = array('password');
+  fn_a42($x86);
+  if(empty($x25)){
+           $x40 = (int)$x23['id'];
+     $x65 = fn_a35($x20->escape($_POST['password']));
+     $x38   = sha1($x65);
+          $x98 = "UPDATE users SET password='{$x38}' WHERE id='{$x20->escape($x40)}'";
+       $x88 = $x20->query($x98);
+        if($x88 && $x20->affected_rows() === 1){
+          $x97->msg('s',"User password has been updated ");
+          fn_a34('edit_user.php?id='.(int)$x23['id'], false);
         } else {
-          $session->msg('d',' Sorry failed to updated user password!');
-          redirect('edit_user.php?id='.(int)$e_user['id'], false);
+          $x97->msg('d',' Sorry failed to updated user password!');
+          fn_a34('edit_user.php?id='.(int)$x23['id'], false);
         }
   } else {
-    $session->msg("d", $errors);
-    redirect('edit_user.php?id='.(int)$e_user['id'],false);
+    $x97->msg("d", $x25);
+    fn_a34('edit_user.php?id='.(int)$x23['id'],false);
   }
 }
 
 ?>
 <?php include_once('layouts/header.php'); ?>
  <div class="row">
-   <div class="col-md-12"> <?php echo display_msg($msg); ?> </div>
+   <div class="col-md-12"> <?php echo fn_a8($x53); ?> </div>
   <div class="col-md-6">
      <div class="panel panel-default">
        <div class="panel-heading">
         <strong>
           <span class="glyphicon glyphicon-th"></span>
-          Update <?php echo remove_junk(ucwords($e_user['name'])); ?> Account
+          Update <?php echo fn_a35(ucwords($x23['name'])); ?> Account
         </strong>
        </div>
        <div class="panel-body">
-          <form method="post" action="edit_user.php?id=<?php echo (int)$e_user['id'];?>" class="clearfix">
+          <form method="post" action="edit_user.php?id=<?php echo (int)$x23['id'];?>" class="clearfix">
             <div class="form-group">
                   <label for="name" class="control-label">Name</label>
-                  <input type="name" class="form-control" name="name" value="<?php echo remove_junk(ucwords($e_user['name'])); ?>">
+                  <input type="name" class="form-control" name="name" value="<?php echo fn_a35(ucwords($x23['name'])); ?>">
             </div>
             <div class="form-group">
                   <label for="username" class="control-label">Username</label>
-                  <input type="text" class="form-control" name="username" value="<?php echo remove_junk(ucwords($e_user['username'])); ?>">
+                  <input type="text" class="form-control" name="username" value="<?php echo fn_a35(ucwords($x23['username'])); ?>">
             </div>
             <div class="form-group">
               <label for="level">User Role</label>
                 <select class="form-control" name="level">
-                  <?php foreach ($groups as $group ):?>
-                   <option <?php if($group['group_level'] === $e_user['user_level']) echo 'selected="selected"';?> value="<?php echo $group['group_level'];?>"><?php echo ucwords($group['group_name']);?></option>
+                  <?php foreach ($x37 as $x36 ):?>
+                   <option <?php if($x36['group_level'] === $x23['user_level']) echo 'selected="selected"';?> value="<?php echo $x36['group_level'];?>"><?php echo ucwords($x36['group_name']);?></option>
                 <?php endforeach;?>
                 </select>
             </div>
             <div class="form-group">
               <label for="status">Status</label>
                 <select class="form-control" name="status">
-                  <option <?php if($e_user['status'] === '1') echo 'selected="selected"';?>value="1">Active</option>
-                  <option <?php if($e_user['status'] === '0') echo 'selected="selected"';?> value="0">Deactive</option>
+                  <option <?php if($x23['status'] === '1') echo 'selected="selected"';?>value="1">Active</option>
+                  <option <?php if($x23['status'] === '0') echo 'selected="selected"';?> value="0">Deactive</option>
                 </select>
             </div>
             <div class="form-group clearfix">
@@ -113,11 +113,11 @@ if(isset($_POST['update-pass'])) {
       <div class="panel-heading">
         <strong>
           <span class="glyphicon glyphicon-th"></span>
-          Change <?php echo remove_junk(ucwords($e_user['name'])); ?> password
+          Change <?php echo fn_a35(ucwords($x23['name'])); ?> password
         </strong>
       </div>
       <div class="panel-body">
-        <form action="edit_user.php?id=<?php echo (int)$e_user['id'];?>" method="post" class="clearfix">
+        <form action="edit_user.php?id=<?php echo (int)$x23['id'];?>" method="post" class="clearfix">
           <div class="form-group">
                 <label for="password" class="control-label">Password</label>
                 <input type="password" class="form-control" name="password" placeholder="Type user new password">

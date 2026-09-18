@@ -1,44 +1,44 @@
 <?php
-  $page_title = 'Add User';
+  $x64 = 'Add User';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-  page_require_level(1);
-  $groups = find_all('user_groups');
+  
+  fn_a28(1);
+  $x37 = fn_a9('user_groups');
 ?>
 <?php
   if(isset($_POST['add_user'])){
 
-   $req_fields = array('full-name','username','password','level' );
-   validate_fields($req_fields);
+   $x86 = array('full-name','username','password','level' );
+   fn_a42($x86);
 
-   if(empty($errors)){
-           $name   = remove_junk($db->escape($_POST['full-name']));
-       $username   = remove_junk($db->escape($_POST['username']));
-       $password   = remove_junk($db->escape($_POST['password']));
-       $user_level = (int)$db->escape($_POST['level']);
-       $password = sha1($password);
-        $query = "INSERT INTO users (";
-        $query .="name,username,password,user_level,status";
-        $query .=") VALUES (";
-        $query .=" '{$name}', '{$username}', '{$password}', '{$user_level}','1'";
-        $query .=")";
-        if($db->query($query)){
-          //sucess
-          $session->msg('s',"User account has been creted! ");
-          redirect('add_user.php', false);
+   if(empty($x25)){
+           $x54   = fn_a35($x20->escape($_POST['full-name']));
+       $x120   = fn_a35($x20->escape($_POST['username']));
+       $x65   = fn_a35($x20->escape($_POST['password']));
+       $x118 = (int)$x20->escape($_POST['level']);
+       $x65 = sha1($x65);
+        $x78 = "INSERT INTO users (";
+        $x78 .="name,username,password,user_level,status";
+        $x78 .=") VALUES (";
+        $x78 .=" '{$x54}', '{$x120}', '{$x65}', '{$x118}','1'";
+        $x78 .=")";
+        if($x20->query($x78)){
+          
+          $x97->msg('s',"User account has been creted! ");
+          fn_a34('add_user.php', false);
         } else {
-          //failed
-          $session->msg('d',' Sorry failed to create account!');
-          redirect('add_user.php', false);
+          
+          $x97->msg('d',' Sorry failed to create account!');
+          fn_a34('add_user.php', false);
         }
    } else {
-     $session->msg("d", $errors);
-      redirect('add_user.php',false);
+     $x97->msg("d", $x25);
+      fn_a34('add_user.php',false);
    }
  }
 ?>
 <?php include_once('layouts/header.php'); ?>
-  <?php echo display_msg($msg); ?>
+  <?php echo fn_a8($x53); ?>
   <div class="row">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -65,8 +65,8 @@
             <div class="form-group">
               <label for="level">User Role</label>
                 <select class="form-control" name="level">
-                  <?php foreach ($groups as $group ):?>
-                   <option value="<?php echo $group['group_level'];?>"><?php echo ucwords($group['group_name']);?></option>
+                  <?php foreach ($x37 as $x36 ):?>
+                   <option value="<?php echo $x36['group_level'];?>"><?php echo ucwords($x36['group_name']);?></option>
                 <?php endforeach;?>
                 </select>
             </div>

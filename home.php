@@ -1,12 +1,12 @@
 <?php
-  $page_title = 'Home Page';
+  $x64 = 'Home Page';
   require_once('includes/load.php');
-  if (!$session->isUserLoggedIn(true)) { redirect('index.php', false);}
+  if (!$x97->isUserLoggedIn(true)) { fn_a34('index.php', false);}
 ?>
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
   <div class="col-md-12">
-    <?php echo display_msg($msg); ?>
+    <?php echo fn_a8($x53); ?>
   </div>
  <div class="col-md-12">
     <div class="panel">

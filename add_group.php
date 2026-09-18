@@ -1,44 +1,44 @@
 <?php
-  $page_title = 'Add Group';
+  $x64 = 'Add Group';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   page_require_level(1);
+  
+   fn_a28(1);
 ?>
 <?php
   if(isset($_POST['add'])){
 
-   $req_fields = array('group-name','group-level');
-   validate_fields($req_fields);
+   $x86 = array('group-name','group-level');
+   fn_a42($x86);
 
-   if(find_by_groupName($_POST['group-name']) === false ){
-     $session->msg('d','<b>Sorry!</b> Entered Group Name already in database!');
-     redirect('add_group.php', false);
-   }elseif(find_by_groupLevel($_POST['group-level']) === false) {
-     $session->msg('d','<b>Sorry!</b> Entered Group Level already in database!');
-     redirect('add_group.php', false);
+   if(fn_a14($_POST['group-name']) === false ){
+     $x97->msg('d','<b>Sorry!</b> Entered Group Name already in database!');
+     fn_a34('add_group.php', false);
+   }elseif(fn_a13($_POST['group-level']) === false) {
+     $x97->msg('d','<b>Sorry!</b> Entered Group Level already in database!');
+     fn_a34('add_group.php', false);
    }
-   if(empty($errors)){
-           $name = remove_junk($db->escape($_POST['group-name']));
-          $level = remove_junk($db->escape($_POST['group-level']));
-         $status = remove_junk($db->escape($_POST['status']));
+   if(empty($x25)){
+           $x54 = fn_a35($x20->escape($_POST['group-name']));
+          $x45 = fn_a35($x20->escape($_POST['group-level']));
+         $x101 = fn_a35($x20->escape($_POST['status']));
 
-        $query  = "INSERT INTO user_groups (";
-        $query .="group_name,group_level,group_status";
-        $query .=") VALUES (";
-        $query .=" '{$name}', '{$level}','{$status}'";
-        $query .=")";
-        if($db->query($query)){
-          //sucess
-          $session->msg('s',"Group has been creted! ");
-          redirect('add_group.php', false);
+        $x78  = "INSERT INTO user_groups (";
+        $x78 .="group_name,group_level,group_status";
+        $x78 .=") VALUES (";
+        $x78 .=" '{$x54}', '{$x45}','{$x101}'";
+        $x78 .=")";
+        if($x20->query($x78)){
+          
+          $x97->msg('s',"Group has been creted! ");
+          fn_a34('add_group.php', false);
         } else {
-          //failed
-          $session->msg('d',' Sorry failed to create Group!');
-          redirect('add_group.php', false);
+          
+          $x97->msg('d',' Sorry failed to create Group!');
+          fn_a34('add_group.php', false);
         }
    } else {
-     $session->msg("d", $errors);
-      redirect('add_group.php',false);
+     $x97->msg("d", $x25);
+      fn_a34('add_group.php',false);
    }
  }
 ?>
@@ -47,7 +47,7 @@
     <div class="text-center">
        <h3>Add new user Group</h3>
      </div>
-     <?php echo display_msg($msg); ?>
+     <?php echo fn_a8($x53); ?>
       <form method="post" action="add_group.php" class="clearfix">
         <div class="form-group">
               <label for="name" class="control-label">Group Name</label>

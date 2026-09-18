@@ -1,50 +1,50 @@
 <?php
-  $page_title = 'Edit product';
+  $x64 = 'Edit product';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   page_require_level(2);
+  
+   fn_a28(2);
 ?>
 <?php
-$product = find_by_id('products',(int)$_GET['id']);
-$all_categories = find_all('categories');
-$all_photo = find_all('media');
-if(!$product){
-  $session->msg("d","Missing product id.");
-  redirect('product.php');
+$x69 = fn_a15('products',(int)$_GET['id']);
+$x3 = fn_a9('categories');
+$x5 = fn_a9('media');
+if(!$x69){
+  $x97->msg("d","Missing product id.");
+  fn_a34('product.php');
 }
 ?>
 <?php
  if(isset($_POST['product'])){
-    $req_fields = array('product-title','product-categorie','product-quantity','buying-price', 'saleing-price' );
-    validate_fields($req_fields);
+    $x86 = array('product-title','product-categorie','product-quantity','buying-price', 'saleing-price' );
+    fn_a42($x86);
 
-   if(empty($errors)){
-       $p_name  = remove_junk($db->escape($_POST['product-title']));
-       $p_cat   = (int)$_POST['product-categorie'];
-       $p_qty   = remove_junk($db->escape($_POST['product-quantity']));
-       $p_buy   = remove_junk($db->escape($_POST['buying-price']));
-       $p_sale  = remove_junk($db->escape($_POST['saleing-price']));
+   if(empty($x25)){
+       $x61  = fn_a35($x20->escape($_POST['product-title']));
+       $x59   = (int)$_POST['product-categorie'];
+       $x62   = fn_a35($x20->escape($_POST['product-quantity']));
+       $x58   = fn_a35($x20->escape($_POST['buying-price']));
+       $x63  = fn_a35($x20->escape($_POST['saleing-price']));
        if (is_null($_POST['product-photo']) || $_POST['product-photo'] === "") {
-         $media_id = '0';
+         $x51 = '0';
        } else {
-         $media_id = remove_junk($db->escape($_POST['product-photo']));
+         $x51 = fn_a35($x20->escape($_POST['product-photo']));
        }
-       $query   = "UPDATE products SET";
-       $query  .=" name ='{$p_name}', quantity ='{$p_qty}',";
-       $query  .=" buy_price ='{$p_buy}', sale_price ='{$p_sale}', categorie_id ='{$p_cat}',media_id='{$media_id}'";
-       $query  .=" WHERE id ='{$product['id']}'";
-       $result = $db->query($query);
-               if($result && $db->affected_rows() === 1){
-                 $session->msg('s',"Product updated ");
-                 redirect('product.php', false);
+       $x78   = "UPDATE products SET";
+       $x78  .=" name ='{$x61}', quantity ='{$x62}',";
+       $x78  .=" buy_price ='{$x58}', sale_price ='{$x63}', categorie_id ='{$x59}',media_id='{$x51}'";
+       $x78  .=" WHERE id ='{$x69['id']}'";
+       $x88 = $x20->query($x78);
+               if($x88 && $x20->affected_rows() === 1){
+                 $x97->msg('s',"Product updated ");
+                 fn_a34('product.php', false);
                } else {
-                 $session->msg('d',' Sorry failed to updated!');
-                 redirect('edit_product.php?id='.$product['id'], false);
+                 $x97->msg('d',' Sorry failed to updated!');
+                 fn_a34('edit_product.php?id='.$x69['id'], false);
                }
 
    } else{
-       $session->msg("d", $errors);
-       redirect('edit_product.php?id='.$product['id'], false);
+       $x97->msg("d", $x25);
+       fn_a34('edit_product.php?id='.$x69['id'], false);
    }
 
  }
@@ -53,7 +53,7 @@ if(!$product){
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
   <div class="col-md-12">
-    <?php echo display_msg($msg); ?>
+    <?php echo fn_a8($x53); ?>
   </div>
 </div>
   <div class="row">
@@ -66,13 +66,13 @@ if(!$product){
         </div>
         <div class="panel-body">
          <div class="col-md-7">
-           <form method="post" action="edit_product.php?id=<?php echo (int)$product['id'] ?>">
+           <form method="post" action="edit_product.php?id=<?php echo (int)$x69['id'] ?>">
               <div class="form-group">
                 <div class="input-group">
                   <span class="input-group-addon">
                    <i class="glyphicon glyphicon-th-large"></i>
                   </span>
-                  <input type="text" class="form-control" name="product-title" value="<?php echo remove_junk($product['name']);?>">
+                  <input type="text" class="form-control" name="product-title" value="<?php echo fn_a35($x69['name']);?>">
                </div>
               </div>
               <div class="form-group">
@@ -80,18 +80,18 @@ if(!$product){
                   <div class="col-md-6">
                     <select class="form-control" name="product-categorie">
                     <option value=""> Select a categorie</option>
-                   <?php  foreach ($all_categories as $cat): ?>
-                     <option value="<?php echo (int)$cat['id']; ?>" <?php if($product['categorie_id'] === $cat['id']): echo "selected"; endif; ?> >
-                       <?php echo remove_junk($cat['name']); ?></option>
+                   <?php  foreach ($x3 as $x11): ?>
+                     <option value="<?php echo (int)$x11['id']; ?>" <?php if($x69['categorie_id'] === $x11['id']): echo "selected"; endif; ?> >
+                       <?php echo fn_a35($x11['name']); ?></option>
                    <?php endforeach; ?>
                  </select>
                   </div>
                   <div class="col-md-6">
                     <select class="form-control" name="product-photo">
                       <option value=""> No image</option>
-                      <?php  foreach ($all_photo as $photo): ?>
-                        <option value="<?php echo (int)$photo['id'];?>" <?php if($product['media_id'] === $photo['id']): echo "selected"; endif; ?> >
-                          <?php echo $photo['file_name'] ?></option>
+                      <?php  foreach ($x5 as $x68): ?>
+                        <option value="<?php echo (int)$x68['id'];?>" <?php if($x69['media_id'] === $x68['id']): echo "selected"; endif; ?> >
+                          <?php echo $x68['file_name'] ?></option>
                       <?php endforeach; ?>
                     </select>
                   </div>
@@ -107,7 +107,7 @@ if(!$product){
                       <span class="input-group-addon">
                        <i class="glyphicon glyphicon-shopping-cart"></i>
                       </span>
-                      <input type="number" class="form-control" name="product-quantity" value="<?php echo remove_junk($product['quantity']); ?>">
+                      <input type="number" class="form-control" name="product-quantity" value="<?php echo fn_a35($x69['quantity']); ?>">
                    </div>
                   </div>
                  </div>
@@ -118,7 +118,7 @@ if(!$product){
                       <span class="input-group-addon">
                         <i class="glyphicon glyphicon-usd"></i>
                       </span>
-                      <input type="number" class="form-control" name="buying-price" value="<?php echo remove_junk($product['buy_price']);?>">
+                      <input type="number" class="form-control" name="buying-price" value="<?php echo fn_a35($x69['buy_price']);?>">
                       <span class="input-group-addon">.00</span>
                    </div>
                   </div>
@@ -130,7 +130,7 @@ if(!$product){
                        <span class="input-group-addon">
                          <i class="glyphicon glyphicon-usd"></i>
                        </span>
-                       <input type="number" class="form-control" name="saleing-price" value="<?php echo remove_junk($product['sale_price']);?>">
+                       <input type="number" class="form-control" name="saleing-price" value="<?php echo fn_a35($x69['sale_price']);?>">
                        <span class="input-group-addon">.00</span>
                     </div>
                    </div>

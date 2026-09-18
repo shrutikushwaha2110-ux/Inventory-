@@ -1,120 +1,120 @@
 <?php
- $errors = array();
+ $x25 = array();
 
- /*--------------------------------------------------------------*/
- /* Function for Remove escapes special
- /* characters in a string for use in an SQL statement
- /*--------------------------------------------------------------*/
-function real_escape($str){
-  global $con;
-  $escape = mysqli_real_escape_string($con,$str);
-  return $escape;
+ 
+ 
+
+
+function fn_a33($x102){
+  global $x15;
+  $x26 = mysqli_real_escape_string($x15,$x102);
+  return $x26;
 }
-/*--------------------------------------------------------------*/
-/* Function for Remove html characters
-/*--------------------------------------------------------------*/
-function remove_junk($str){
-  $str = nl2br($str);
-  $str = htmlspecialchars(strip_tags($str, ENT_QUOTES));
-  return $str;
+
+
+
+function fn_a35($x102){
+  $x102 = nl2br($x102);
+  $x102 = htmlspecialchars(strip_tags($x102, ENT_QUOTES));
+  return $x102;
 }
-/*--------------------------------------------------------------*/
-/* Function for Uppercase first character
-/*--------------------------------------------------------------*/
-function first_character($str){
-  $val = str_replace('-'," ",$str);
-  $val = ucfirst($val);
-  return $val;
+
+
+
+function fn_a22($x102){
+  $x121 = str_replace('-'," ",$x102);
+  $x121 = ucfirst($x121);
+  return $x121;
 }
-/*--------------------------------------------------------------*/
-/* Function for Checking input fields not empty
-/*--------------------------------------------------------------*/
-function validate_fields($var){
-  global $errors;
-  foreach ($var as $field) {
-    $val = remove_junk($_POST[$field]);
-    if(isset($val) && $val==''){
-      $errors = $field ." can't be blank.";
-      return $errors;
+
+
+
+function fn_a42($x123){
+  global $x25;
+  foreach ($x123 as $x28) {
+    $x121 = fn_a35($_POST[$x28]);
+    if(isset($x121) && $x121==''){
+      $x25 = $x28 ." can't be blank.";
+      return $x25;
     }
   }
 }
-/*--------------------------------------------------------------*/
-/* Function for Display Session Message
-   Ex echo displayt_msg($message);
-/*--------------------------------------------------------------*/
-function display_msg($msg =''){
-   $output = array();
-   if(!empty($msg)) {
-      foreach ($msg as $key => $value) {
-         $output  = "<div class=\"alert alert-{$key}\">";
-         $output .= "<a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>";
-         $output .= remove_junk(first_character($value));
-         $output .= "</div>";
+
+
+
+
+function fn_a8($x53 =''){
+   $x57 = array();
+   if(!empty($x53)) {
+      foreach ($x53 as $x43 => $x122) {
+         $x57  = "<div class=\"alert alert-{$x43}\">";
+         $x57 .= "<a href=\"#\" class=\"close\" data-dismiss=\"alert\">&times;</a>";
+         $x57 .= fn_a35(fn_a22($x122));
+         $x57 .= "</div>";
       }
-      return $output;
+      return $x57;
    } else {
      return "" ;
    }
 }
-/*--------------------------------------------------------------*/
-/* Function for redirect
-/*--------------------------------------------------------------*/
-function redirect($url, $permanent = false)
+
+
+
+function fn_a34($x113, $x67 = false)
 {
     if (headers_sent() === false)
     {
-      header('Location: ' . $url, true, ($permanent === true) ? 301 : 302);
+      header('Location: ' . $x113, true, ($x67 === true) ? 301 : 302);
     }
 
     exit();
 }
-/*--------------------------------------------------------------*/
-/* Function for find out total saleing price, buying price and profit
-/*--------------------------------------------------------------*/
-function total_price($totals){
-   $sum = 0;
-   $sub = 0;
-   foreach($totals as $total ){
-     $sum += $total['total_saleing_price'];
-     $sub += $total['total_buying_price'];
-     $profit = $sum - $sub;
+
+
+
+function fn_a37($x109){
+   $x104 = 0;
+   $x103 = 0;
+   foreach($x109 as $x108 ){
+     $x104 += $x108['total_saleing_price'];
+     $x103 += $x108['total_buying_price'];
+     $x76 = $x104 - $x103;
    }
-   return array($sum,$profit);
+   return array($x104,$x76);
 }
-/*--------------------------------------------------------------*/
-/* Function for Readable date time
-/*--------------------------------------------------------------*/
-function read_date($str){
-     if($str)
-      return date('F j, Y, g:i:s a', strtotime($str));
+
+
+
+function fn_a32($x102){
+     if($x102)
+      return date('F j, Y, g:i:s a', strtotime($x102));
      else
       return null;
   }
-/*--------------------------------------------------------------*/
-/* Function for  Readable Make date time
-/*--------------------------------------------------------------*/
-function make_date(){
+
+
+
+function fn_a25(){
   return strftime("%Y-%m-%d %H:%M:%S", time());
 }
-/*--------------------------------------------------------------*/
-/* Function for  Readable date time
-/*--------------------------------------------------------------*/
-function count_id(){
-  static $count = 1;
-  return $count++;
-}
-/*--------------------------------------------------------------*/
-/* Function for Creting random string
-/*--------------------------------------------------------------*/
-function randString($length = 5)
-{
-  $str='';
-  $cha = "0123456789abcdefghijklmnopqrstuvwxyz";
 
-  for($x=0; $x<$length; $x++)
-   $str .= $cha[mt_rand(0,strlen($cha))];
-  return $str;
+
+
+function fn_a4(){
+  static $x16 = 1;
+  return $x16++;
+}
+
+
+
+function fn_a31($x44 = 5)
+{
+  $x102='';
+  $x14 = "0123456789abcdefghijklmnopqrstuvwxyz";
+
+  for($x124=0; $x124<$x44; $x124++)
+   $x102 .= $x14[mt_rand(0,strlen($x14))];
+  return $x102;
 }
 
 

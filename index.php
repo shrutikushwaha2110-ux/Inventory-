@@ -1,7 +1,7 @@
 <?php
   ob_start();
   require_once('includes/load.php');
-  if($session->isUserLoggedIn(true)) { redirect('home.php', false);}
+  if($x97->isUserLoggedIn(true)) { fn_a34('home.php', false);}
 ?>
 <?php include_once('layouts/header.php'); ?>
 <div class="login-page">
@@ -9,7 +9,7 @@
        <h1>Welcome</h1>
        <p>Sign in to start your session</p>
      </div>
-     <?php echo display_msg($msg); ?>
+     <?php echo fn_a8($x53); ?>
       <form method="post" action="auth.php" class="clearfix">
         <div class="form-group">
               <label for="username" class="control-label">Username</label>

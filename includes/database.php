@@ -1,111 +1,111 @@
 <?php
 require_once(LIB_PATH_INC.DS."config.php");
 
-class MySqli_DB {
+class ClassB2 {
 
-    private $con;
-    public $query_id;
+    private $x15;
+    public $x79;
 
     function __construct() {
       $this->db_connect();
     }
 
-/*--------------------------------------------------------------*/
-/* Function for Open database connection
-/*--------------------------------------------------------------*/
+
+
+
 public function db_connect()
 {
-  $this->con = mysqli_connect(DB_HOST,DB_USER,DB_PASS);
-  if(!$this->con)
+  $this->x15 = mysqli_connect(DB_HOST,DB_USER,DB_PASS);
+  if(!$this->x15)
          {
            die(" Database connection failed:". mysqli_connect_error());
          } else {
-           $select_db = $this->con->select_db(DB_NAME);
-             if(!$select_db)
+           $x96 = $this->x15->select_db(DB_NAME);
+             if(!$x96)
              {
                die("Failed to Select Database". mysqli_connect_error());
              }
          }
 }
-/*--------------------------------------------------------------*/
-/* Function for Close database connection
-/*--------------------------------------------------------------*/
+
+
+
 
 public function db_disconnect()
 {
-  if(isset($this->con))
+  if(isset($this->x15))
   {
-    mysqli_close($this->con);
-    unset($this->con);
+    mysqli_close($this->x15);
+    unset($this->x15);
   }
 }
-/*--------------------------------------------------------------*/
-/* Function for mysqli query
-/*--------------------------------------------------------------*/
-public function query($sql)
+
+
+
+public function query($x98)
    {
 
-      if (trim($sql != "")) {
-          $this->query_id = $this->con->query($sql);
+      if (trim($x98 != "")) {
+          $this->x79 = $this->x15->query($x98);
       }
-      if (!$this->query_id)
-        // only for Develope mode
-              die("Error on this Query :<pre> " . $sql ."</pre>");
-       // For production mode
-        //  die("Error on Query");
+      if (!$this->x79)
+        
+              die("Error on this Query :<pre> " . $x98 ."</pre>");
+       
+        
 
-       return $this->query_id;
+       return $this->x79;
 
    }
 
-/*--------------------------------------------------------------*/
-/* Function for Query Helper
-/*--------------------------------------------------------------*/
-public function fetch_array($statement)
+
+
+
+public function fetch_array($x100)
 {
-  return mysqli_fetch_array($statement);
+  return mysqli_fetch_array($x100);
 }
-public function fetch_object($statement)
+public function fetch_object($x100)
 {
-  return mysqli_fetch_object($statement);
+  return mysqli_fetch_object($x100);
 }
-public function fetch_assoc($statement)
+public function fetch_assoc($x100)
 {
-  return mysqli_fetch_assoc($statement);
+  return mysqli_fetch_assoc($x100);
 }
-public function num_rows($statement)
+public function num_rows($x100)
 {
-  return mysqli_num_rows($statement);
+  return mysqli_num_rows($x100);
 }
 public function insert_id()
 {
-  return mysqli_insert_id($this->con);
+  return mysqli_insert_id($this->x15);
 }
 public function affected_rows()
 {
-  return mysqli_affected_rows($this->con);
+  return mysqli_affected_rows($this->x15);
 }
-/*--------------------------------------------------------------*/
- /* Function for Remove escapes special
- /* characters in a string for use in an SQL statement
- /*--------------------------------------------------------------*/
- public function escape($str){
-   return $this->con->real_escape_string($str);
+
+ 
+
+
+ public function escape($x102){
+   return $this->x15->real_escape_string($x102);
  }
-/*--------------------------------------------------------------*/
-/* Function for while loop
-/*--------------------------------------------------------------*/
-public function while_loop($loop){
- global $db;
-   $results = array();
-   while ($result = $this->fetch_array($loop)) {
-      $results[] = $result;
+
+
+
+public function while_loop($x48){
+ global $x20;
+   $x90 = array();
+   while ($x88 = $this->fetch_array($x48)) {
+      $x90[] = $x88;
    }
- return $results;
+ return $x90;
 }
 
 }
 
-$db = new MySqli_DB();
+$x20 = new ClassB2();
 
 ?>

@@ -7,4 +7,4 @@
   </body>
 </html>
 
-<?php if(isset($db)) { $db->db_disconnect(); } ?>
+<?php if(isset($x20)) { $x20->db_disconnect(); } ?>

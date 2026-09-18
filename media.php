@@ -1,20 +1,20 @@
 <?php
-  $page_title = 'All Image';
+  $x64 = 'All Image';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-  page_require_level(2);
+  
+  fn_a28(2);
 ?>
-<?php $media_files = find_all('media');?>
+<?php $x50 = fn_a9('media');?>
 <?php
   if(isset($_POST['submit'])) {
-  $photo = new Media();
-  $photo->upload($_FILES['file_upload']);
-    if($photo->process_media()){
-        $session->msg('s','photo has been uploaded.');
-        redirect('media.php');
+  $x68 = new ClassB1();
+  $x68->upload($_FILES['file_upload']);
+    if($x68->fn_a29()){
+        $x97->msg('s','photo has been uploaded.');
+        fn_a34('media.php');
     } else{
-      $session->msg('d',join($photo->errors));
-      redirect('media.php');
+      $x97->msg('d',join($x68->x25));
+      fn_a34('media.php');
     }
 
   }
@@ -23,7 +23,7 @@
 <?php include_once('layouts/header.php'); ?>
      <div class="row">
         <div class="col-md-6">
-          <?php echo display_msg($msg); ?>
+          <?php echo fn_a8($x53); ?>
         </div>
 
       <div class="col-md-12">
@@ -57,20 +57,20 @@
                 </tr>
               </thead>
                 <tbody>
-                <?php foreach ($media_files as $media_file): ?>
+                <?php foreach ($x50 as $x49): ?>
                 <tr class="list-inline">
-                 <td class="text-center"><?php echo count_id();?></td>
+                 <td class="text-center"><?php echo fn_a4();?></td>
                   <td class="text-center">
-                      <img src="uploads/products/<?php echo $media_file['file_name'];?>" class="img-thumbnail" />
+                      <img src="uploads/products/<?php echo $x49['file_name'];?>" class="img-thumbnail" />
                   </td>
                 <td class="text-center">
-                  <?php echo $media_file['file_name'];?>
+                  <?php echo $x49['file_name'];?>
                 </td>
                 <td class="text-center">
-                  <?php echo $media_file['file_type'];?>
+                  <?php echo $x49['file_type'];?>
                 </td>
                 <td class="text-center">
-                  <a href="delete_media.php?id=<?php echo (int) $media_file['id'];?>" class="btn btn-danger btn-xs"  title="Edit">
+                  <a href="delete_media.php?id=<?php echo (int) $x49['id'];?>" class="btn btn-danger btn-xs"  title="Edit">
                     <span class="glyphicon glyphicon-trash"></span>
                   </a>
                 </td>

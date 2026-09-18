@@ -1,44 +1,44 @@
 <?php
-  $page_title = 'Add Product';
+  $x64 = 'Add Product';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-  page_require_level(2);
-  $all_categories = find_all('categories');
-  $all_photo = find_all('media');
+  
+  fn_a28(2);
+  $x3 = fn_a9('categories');
+  $x5 = fn_a9('media');
 ?>
 <?php
  if(isset($_POST['add_product'])){
-   $req_fields = array('product-title','product-categorie','product-quantity','buying-price', 'saleing-price' );
-   validate_fields($req_fields);
-   if(empty($errors)){
-     $p_name  = remove_junk($db->escape($_POST['product-title']));
-     $p_cat   = remove_junk($db->escape($_POST['product-categorie']));
-     $p_qty   = remove_junk($db->escape($_POST['product-quantity']));
-     $p_buy   = remove_junk($db->escape($_POST['buying-price']));
-     $p_sale  = remove_junk($db->escape($_POST['saleing-price']));
+   $x86 = array('product-title','product-categorie','product-quantity','buying-price', 'saleing-price' );
+   fn_a42($x86);
+   if(empty($x25)){
+     $x61  = fn_a35($x20->escape($_POST['product-title']));
+     $x59   = fn_a35($x20->escape($_POST['product-categorie']));
+     $x62   = fn_a35($x20->escape($_POST['product-quantity']));
+     $x58   = fn_a35($x20->escape($_POST['buying-price']));
+     $x63  = fn_a35($x20->escape($_POST['saleing-price']));
      if (is_null($_POST['product-photo']) || $_POST['product-photo'] === "") {
-       $media_id = '0';
+       $x51 = '0';
      } else {
-       $media_id = remove_junk($db->escape($_POST['product-photo']));
+       $x51 = fn_a35($x20->escape($_POST['product-photo']));
      }
-     $date    = make_date();
-     $query  = "INSERT INTO products (";
-     $query .=" name,quantity,buy_price,sale_price,categorie_id,media_id,date";
-     $query .=") VALUES (";
-     $query .=" '{$p_name}', '{$p_qty}', '{$p_buy}', '{$p_sale}', '{$p_cat}', '{$media_id}', '{$date}'";
-     $query .=")";
-     $query .=" ON DUPLICATE KEY UPDATE name='{$p_name}'";
-     if($db->query($query)){
-       $session->msg('s',"Product added ");
-       redirect('add_product.php', false);
+     $x19    = fn_a25();
+     $x78  = "INSERT INTO products (";
+     $x78 .=" name,quantity,buy_price,sale_price,categorie_id,media_id,date";
+     $x78 .=") VALUES (";
+     $x78 .=" '{$x61}', '{$x62}', '{$x58}', '{$x63}', '{$x59}', '{$x51}', '{$x19}'";
+     $x78 .=")";
+     $x78 .=" ON DUPLICATE KEY UPDATE name='{$x61}'";
+     if($x20->query($x78)){
+       $x97->msg('s',"Product added ");
+       fn_a34('add_product.php', false);
      } else {
-       $session->msg('d',' Sorry failed to added!');
-       redirect('product.php', false);
+       $x97->msg('d',' Sorry failed to added!');
+       fn_a34('product.php', false);
      }
 
    } else{
-     $session->msg("d", $errors);
-     redirect('add_product.php',false);
+     $x97->msg("d", $x25);
+     fn_a34('add_product.php',false);
    }
 
  }
@@ -47,7 +47,7 @@
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
   <div class="col-md-12">
-    <?php echo display_msg($msg); ?>
+    <?php echo fn_a8($x53); ?>
   </div>
 </div>
   <div class="row">
@@ -75,18 +75,18 @@
                   <div class="col-md-6">
                     <select class="form-control" name="product-categorie">
                       <option value="">Select Product Category</option>
-                    <?php  foreach ($all_categories as $cat): ?>
-                      <option value="<?php echo (int)$cat['id'] ?>">
-                        <?php echo $cat['name'] ?></option>
+                    <?php  foreach ($x3 as $x11): ?>
+                      <option value="<?php echo (int)$x11['id'] ?>">
+                        <?php echo $x11['name'] ?></option>
                     <?php endforeach; ?>
                     </select>
                   </div>
                   <div class="col-md-6">
                     <select class="form-control" name="product-photo">
                       <option value="">Select Product Photo</option>
-                    <?php  foreach ($all_photo as $photo): ?>
-                      <option value="<?php echo (int)$photo['id'] ?>">
-                        <?php echo $photo['file_name'] ?></option>
+                    <?php  foreach ($x5 as $x68): ?>
+                      <option value="<?php echo (int)$x68['id'] ?>">
+                        <?php echo $x68['file_name'] ?></option>
                     <?php endforeach; ?>
                     </select>
                   </div>

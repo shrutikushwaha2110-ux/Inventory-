@@ -1,16 +1,16 @@
 <?php
-  $page_title = 'All sale';
+  $x64 = 'All sale';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   page_require_level(3);
+  
+   fn_a28(3);
 ?>
 <?php
-$sales = find_all_sale();
+$x95 = fn_a11();
 ?>
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
   <div class="col-md-6">
-    <?php echo display_msg($msg); ?>
+    <?php echo fn_a8($x53); ?>
   </div>
 </div>
   <div class="row">
@@ -38,19 +38,19 @@ $sales = find_all_sale();
              </tr>
             </thead>
            <tbody>
-             <?php foreach ($sales as $sale):?>
+             <?php foreach ($x95 as $x94):?>
              <tr>
-               <td class="text-center"><?php echo count_id();?></td>
-               <td><?php echo remove_junk($sale['name']); ?></td>
-               <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
-               <td class="text-center"><?php echo remove_junk($sale['price']); ?></td>
-               <td class="text-center"><?php echo $sale['date']; ?></td>
+               <td class="text-center"><?php echo fn_a4();?></td>
+               <td><?php echo fn_a35($x94['name']); ?></td>
+               <td class="text-center"><?php echo (int)$x94['qty']; ?></td>
+               <td class="text-center"><?php echo fn_a35($x94['price']); ?></td>
+               <td class="text-center"><?php echo $x94['date']; ?></td>
                <td class="text-center">
                   <div class="btn-group">
-                     <a href="edit_sale.php?id=<?php echo (int)$sale['id'];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
+                     <a href="edit_sale.php?id=<?php echo (int)$x94['id'];?>" class="btn btn-warning btn-xs"  title="Edit" data-toggle="tooltip">
                        <span class="glyphicon glyphicon-edit"></span>
                      </a>
-                     <a href="delete_sale.php?id=<?php echo (int)$sale['id'];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
+                     <a href="delete_sale.php?id=<?php echo (int)$x94['id'];?>" class="btn btn-danger btn-xs"  title="Delete" data-toggle="tooltip">
                        <span class="glyphicon glyphicon-trash"></span>
                      </a>
                   </div>

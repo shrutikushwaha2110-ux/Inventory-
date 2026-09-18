@@ -1,15 +1,15 @@
 <?php
-  $page_title = 'My profile';
+  $x64 = 'My profile';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   page_require_level(3);
+  
+   fn_a28(3);
 ?>
   <?php
-  $user_id = (int)$_GET['id'];
-  if(empty($user_id)):
-    redirect('home.php',false);
+  $x116 = (int)$_GET['id'];
+  if(empty($x116)):
+    fn_a34('home.php',false);
   else:
-    $user_p = find_by_id('users',$user_id);
+    $x119 = fn_a15('users',$x116);
   endif;
 ?>
 <?php include_once('layouts/header.php'); ?>
@@ -17,10 +17,10 @@
    <div class="col-md-4">
        <div class="panel profile">
          <div class="jumbotron text-center bg-red">
-            <img class="img-circle img-size-2" src="uploads/users/<?php echo $user_p['image'];?>" alt="">
-           <h3><?php echo first_character($user_p['name']); ?></h3>
+            <img class="img-circle img-size-2" src="uploads/users/<?php echo $x119['image'];?>" alt="">
+           <h3><?php echo fn_a22($x119['name']); ?></h3>
          </div>
-        <?php if( $user_p['id'] === $user['id']):?>
+        <?php if( $x119['id'] === $x114['id']):?>
          <ul class="nav nav-pills nav-stacked">
           <li><a href="edit_account.php"> <i class="glyphicon glyphicon-edit"></i> Edit profile</a></li>
          </ul>

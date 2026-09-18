@@ -1,27 +1,27 @@
 <?php
-$page_title = 'Sales Report';
-$results = '';
+$x64 = 'Sales Report';
+$x90 = '';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   page_require_level(3);
+  
+   fn_a28(3);
 ?>
 <?php
   if(isset($_POST['submit'])){
-    $req_dates = array('start-date','end-date');
-    validate_fields($req_dates);
+    $x84 = array('start-date','end-date');
+    fn_a42($x84);
 
-    if(empty($errors)):
-      $start_date   = remove_junk($db->escape($_POST['start-date']));
-      $end_date     = remove_junk($db->escape($_POST['end-date']));
-      $results      = find_sale_by_dates($start_date,$end_date);
+    if(empty($x25)):
+      $x99   = fn_a35($x20->escape($_POST['start-date']));
+      $x24     = fn_a35($x20->escape($_POST['end-date']));
+      $x90      = fn_a21($x99,$x24);
     else:
-      $session->msg("d", $errors);
-      redirect('sales_report.php', false);
+      $x97->msg("d", $x25);
+      fn_a34('sales_report.php', false);
     endif;
 
   } else {
-    $session->msg("d", "Select dates");
-    redirect('sales_report.php', false);
+    $x97->msg("d", "Select dates");
+    fn_a34('sales_report.php', false);
   }
 ?>
 <!doctype html>
@@ -76,11 +76,11 @@ $results = '';
    </style>
 </head>
 <body>
-  <?php if($results): ?>
+  <?php if($x90): ?>
     <div class="page-break">
        <div class="sale-head pull-right">
            <h1>Sales Report</h1>
-           <strong><?php if(isset($start_date)){ echo $start_date;}?> To <?php if(isset($end_date)){echo $end_date;}?> </strong>
+           <strong><?php if(isset($x99)){ echo $x99;}?> To <?php if(isset($x24)){echo $x24;}?> </strong>
        </div>
       <table class="table table-border">
         <thead>
@@ -94,16 +94,16 @@ $results = '';
           </tr>
         </thead>
         <tbody>
-          <?php foreach($results as $result): ?>
+          <?php foreach($x90 as $x88): ?>
            <tr>
-              <td class=""><?php echo remove_junk($result['date']);?></td>
+              <td class=""><?php echo fn_a35($x88['date']);?></td>
               <td class="desc">
-                <h6><?php echo remove_junk(ucfirst($result['name']));?></h6>
+                <h6><?php echo fn_a35(ucfirst($x88['name']));?></h6>
               </td>
-              <td class="text-right"><?php echo remove_junk($result['buy_price']);?></td>
-              <td class="text-right"><?php echo remove_junk($result['sale_price']);?></td>
-              <td class="text-right"><?php echo remove_junk($result['total_sales']);?></td>
-              <td class="text-right"><?php echo remove_junk($result['total_saleing_price']);?></td>
+              <td class="text-right"><?php echo fn_a35($x88['buy_price']);?></td>
+              <td class="text-right"><?php echo fn_a35($x88['sale_price']);?></td>
+              <td class="text-right"><?php echo fn_a35($x88['total_sales']);?></td>
+              <td class="text-right"><?php echo fn_a35($x88['total_saleing_price']);?></td>
           </tr>
         <?php endforeach; ?>
         </tbody>
@@ -112,23 +112,23 @@ $results = '';
            <td colspan="4"></td>
            <td colspan="1">Grand Total</td>
            <td> $
-           <?php echo number_format(total_price($results)[0], 2);?>
+           <?php echo number_format(fn_a37($x90)[0], 2);?>
           </td>
          </tr>
          <tr class="text-right">
            <td colspan="4"></td>
            <td colspan="1">Profit</td>
-           <td> $<?php echo number_format(total_price($results)[1], 2);?></td>
+           <td> $<?php echo number_format(fn_a37($x90)[1], 2);?></td>
          </tr>
         </tfoot>
       </table>
     </div>
   <?php
     else:
-        $session->msg("d", "Sorry no sales has been found. ");
-        redirect('sales_report.php', false);
+        $x97->msg("d", "Sorry no sales has been found. ");
+        fn_a34('sales_report.php', false);
      endif;
   ?>
 </body>
 </html>
-<?php if(isset($db)) { $db->db_disconnect(); } ?>
+<?php if(isset($x20)) { $x20->db_disconnect(); } ?>

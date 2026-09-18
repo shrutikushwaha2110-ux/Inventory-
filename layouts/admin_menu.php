@@ -29,6 +29,7 @@
     <ul class="nav submenu">
        <li><a href="product.php">Manage products</a> </li>
        <li><a href="add_product.php">Add product</a> </li>
+       <li><a href="low_stock.php">Low stock alert</a> </li>
    </ul>
   </li>
   <li>
@@ -36,6 +37,16 @@
       <i class="glyphicon glyphicon-picture"></i>
       <span>Meadias</span>
     </a>
+  </li>
+  <li>
+    <a href="#" class="submenu-toggle">
+      <i class="glyphicon glyphicon-transfer"></i>
+       <span>Transfers</span>
+      </a>
+      <ul class="nav submenu">
+         <li><a href="transfer_history.php">Transfer History</a> </li>
+         <li><a href="add_transfer.php">Add Transfer</a> </li>
+     </ul>
   </li>
   <li>
     <a href="#" class="submenu-toggle">

@@ -1,10 +1,10 @@
 <?php
  session_start();
 
-class Session {
+class ClassB3 {
 
- public $msg;
- private $user_is_logged_in = false;
+ public $x53;
+ private $x117 = false;
 
  function __construct(){
    $this->flash_msg();
@@ -12,18 +12,18 @@ class Session {
  }
 
   public function isUserLoggedIn(){
-    return $this->user_is_logged_in;
+    return $this->x117;
   }
-  public function login($user_id){
-    $_SESSION['user_id'] = $user_id;
+  public function login($x116){
+    $_SESSION['user_id'] = $x116;
   }
   private function userLoginSetup()
   {
     if(isset($_SESSION['user_id']))
     {
-      $this->user_is_logged_in = true;
+      $this->x117 = true;
     } else {
-      $this->user_is_logged_in = false;
+      $this->x117 = false;
     }
 
   }
@@ -31,29 +31,29 @@ class Session {
     unset($_SESSION['user_id']);
   }
 
-  public function msg($type ='', $msg =''){
-    if(!empty($msg)){
-       if(strlen(trim($type)) == 1){
-         $type = str_replace( array('d', 'i', 'w','s'), array('danger', 'info', 'warning','success'), $type );
+  public function msg($x110 ='', $x53 =''){
+    if(!empty($x53)){
+       if(strlen(trim($x110)) == 1){
+         $x110 = str_replace( array('d', 'i', 'w','s'), array('danger', 'info', 'warning','success'), $x110 );
        }
-       $_SESSION['msg'][$type] = $msg;
+       $_SESSION['msg'][$x110] = $x53;
     } else {
-      return $this->msg;
+      return $this->x53;
     }
   }
 
   private function flash_msg(){
 
     if(isset($_SESSION['msg'])) {
-      $this->msg = $_SESSION['msg'];
+      $this->x53 = $_SESSION['msg'];
       unset($_SESSION['msg']);
     } else {
-      $this->msg;
+      $this->x53;
     }
   }
 }
 
-$session = new Session();
-$msg = $session->msg();
+$x97 = new ClassB3();
+$x53 = $x97->msg();
 
 ?>

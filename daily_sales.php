@@ -1,19 +1,19 @@
 <?php
-  $page_title = 'Daily Sales';
+  $x64 = 'Daily Sales';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   page_require_level(3);
+  
+   fn_a28(3);
 ?>
 
 <?php
- $year  = date('Y');
- $month = date('m');
- $sales = dailySales($year,$month);
+ $x125  = date('Y');
+ $x52 = date('m');
+ $x95 = fn_a6($x125,$x52);
 ?>
 <?php include_once('layouts/header.php'); ?>
 <div class="row">
   <div class="col-md-6">
-    <?php echo display_msg($msg); ?>
+    <?php echo fn_a8($x53); ?>
   </div>
 </div>
   <div class="row">
@@ -37,13 +37,13 @@
              </tr>
             </thead>
            <tbody>
-             <?php foreach ($sales as $sale):?>
+             <?php foreach ($x95 as $x94):?>
              <tr>
-               <td class="text-center"><?php echo count_id();?></td>
-               <td><?php echo remove_junk($sale['name']); ?></td>
-               <td class="text-center"><?php echo (int)$sale['qty']; ?></td>
-               <td class="text-center"><?php echo remove_junk($sale['total_saleing_price']); ?></td>
-               <td class="text-center"><?php echo $sale['date']; ?></td>
+               <td class="text-center"><?php echo fn_a4();?></td>
+               <td><?php echo fn_a35($x94['name']); ?></td>
+               <td class="text-center"><?php echo (int)$x94['qty']; ?></td>
+               <td class="text-center"><?php echo fn_a35($x94['total_saleing_price']); ?></td>
+               <td class="text-center"><?php echo $x94['date']; ?></td>
              </tr>
              <?php endforeach;?>
            </tbody>

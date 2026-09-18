@@ -1,23 +1,23 @@
 <?php
-  $page_title = 'Admin Home Page';
+  $x64 = 'Admin Home Page';
   require_once('includes/load.php');
-  // Checkin What level user has permission to view this page
-   page_require_level(1);
+  
+   fn_a28(1);
 ?>
 <?php
- $c_categorie     = count_by_id('categories');
- $c_product       = count_by_id('products');
- $c_sale          = count_by_id('sales');
- $c_user          = count_by_id('users');
- $products_sold   = find_higest_saleing_product('10');
- $recent_products = find_recent_product_added('5');
- $recent_sales    = find_recent_sale_added('5')
+ $x7     = fn_a3('categories');
+ $x8       = fn_a3('products');
+ $x9          = fn_a3('sales');
+ $x10          = fn_a3('users');
+ $x75   = fn_a17('10');
+ $x81 = fn_a19('5');
+ $x83    = fn_a20('5')
 ?>
 <?php include_once('layouts/header.php'); ?>
 
 <div class="row">
    <div class="col-md-6">
-     <?php echo display_msg($msg); ?>
+     <?php echo fn_a8($x53); ?>
    </div>
 </div>
   <div class="row">
@@ -27,7 +27,7 @@
           <i class="glyphicon glyphicon-user"></i>
         </div>
         <div class="panel-value pull-right">
-          <h2 class="margin-top"> <?php  echo $c_user['total']; ?> </h2>
+          <h2 class="margin-top"> <?php  echo $x10['total']; ?> </h2>
           <p class="text-muted">Users</p>
         </div>
        </div>
@@ -38,7 +38,7 @@
           <i class="glyphicon glyphicon-list"></i>
         </div>
         <div class="panel-value pull-right">
-          <h2 class="margin-top"> <?php  echo $c_categorie['total']; ?> </h2>
+          <h2 class="margin-top"> <?php  echo $x7['total']; ?> </h2>
           <p class="text-muted">Categories</p>
         </div>
        </div>
@@ -49,7 +49,7 @@
           <i class="glyphicon glyphicon-shopping-cart"></i>
         </div>
         <div class="panel-value pull-right">
-          <h2 class="margin-top"> <?php  echo $c_product['total']; ?> </h2>
+          <h2 class="margin-top"> <?php  echo $x8['total']; ?> </h2>
           <p class="text-muted">Products</p>
         </div>
        </div>
@@ -60,7 +60,7 @@
           <i class="glyphicon glyphicon-usd"></i>
         </div>
         <div class="panel-value pull-right">
-          <h2 class="margin-top"> <?php  echo $c_sale['total']; ?></h2>
+          <h2 class="margin-top"> <?php  echo $x9['total']; ?></h2>
           <p class="text-muted">Sales</p>
         </div>
        </div>
@@ -97,11 +97,11 @@
            <tr>
           </thead>
           <tbody>
-            <?php foreach ($products_sold as  $product_sold): ?>
+            <?php foreach ($x75 as  $x72): ?>
               <tr>
-                <td><?php echo remove_junk(first_character($product_sold['name'])); ?></td>
-                <td><?php echo (int)$product_sold['totalSold']; ?></td>
-                <td><?php echo (int)$product_sold['totalQty']; ?></td>
+                <td><?php echo fn_a35(fn_a22($x72['name'])); ?></td>
+                <td><?php echo (int)$x72['totalSold']; ?></td>
+                <td><?php echo (int)$x72['totalQty']; ?></td>
               </tr>
             <?php endforeach; ?>
           <tbody>
@@ -128,16 +128,16 @@
          </tr>
        </thead>
        <tbody>
-         <?php foreach ($recent_sales as  $recent_sale): ?>
+         <?php foreach ($x83 as  $x82): ?>
          <tr>
-           <td class="text-center"><?php echo count_id();?></td>
+           <td class="text-center"><?php echo fn_a4();?></td>
            <td>
-            <a href="edit_sale.php?id=<?php echo (int)$recent_sale['id']; ?>">
-             <?php echo remove_junk(first_character($recent_sale['name'])); ?>
+            <a href="edit_sale.php?id=<?php echo (int)$x82['id']; ?>">
+             <?php echo fn_a35(fn_a22($x82['name'])); ?>
            </a>
            </td>
-           <td><?php echo remove_junk(ucfirst($recent_sale['date'])); ?></td>
-           <td>$<?php echo remove_junk(first_character($recent_sale['price'])); ?></td>
+           <td><?php echo fn_a35(ucfirst($x82['date'])); ?></td>
+           <td>$<?php echo fn_a35(fn_a22($x82['price'])); ?></td>
         </tr>
 
        <?php endforeach; ?>
@@ -157,21 +157,21 @@
       <div class="panel-body">
 
         <div class="list-group">
-      <?php foreach ($recent_products as  $recent_product): ?>
-            <a class="list-group-item clearfix" href="edit_product.php?id=<?php echo    (int)$recent_product['id'];?>">
+      <?php foreach ($x81 as  $x80): ?>
+            <a class="list-group-item clearfix" href="edit_product.php?id=<?php echo    (int)$x80['id'];?>">
                 <h4 class="list-group-item-heading">
-                 <?php if($recent_product['media_id'] === '0'): ?>
+                 <?php if($x80['media_id'] === '0'): ?>
                     <img class="img-avatar img-circle" src="uploads/products/no_image.jpg" alt="">
                   <?php else: ?>
-                  <img class="img-avatar img-circle" src="uploads/products/<?php echo $recent_product['image'];?>" alt="" />
+                  <img class="img-avatar img-circle" src="uploads/products/<?php echo $x80['image'];?>" alt="" />
                 <?php endif;?>
-                <?php echo remove_junk(first_character($recent_product['name']));?>
+                <?php echo fn_a35(fn_a22($x80['name']));?>
                   <span class="label label-warning pull-right">
-                 $<?php echo (int)$recent_product['sale_price']; ?>
+                 $<?php echo (int)$x80['sale_price']; ?>
                   </span>
                 </h4>
                 <span class="list-group-item-text pull-right">
-                <?php echo remove_junk(first_character($recent_product['categorie'])); ?>
+                <?php echo fn_a35(fn_a22($x80['categorie'])); ?>
               </span>
           </a>
       <?php endforeach; ?>
